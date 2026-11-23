@@ -1,7 +1,7 @@
 {
   "name": "antigravity-board",
   "displayName": "Antigravity Board",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Local analytics dashboard for Antigravity (App, IDE & CLI) by BreezeAI: sessions, agent time, tokens, estimated cost, and 12-week activity heatmap right inside Antigravity.",
   "author": {
     "name": "BreezeAI (thanhphong28)",

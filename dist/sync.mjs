@@ -815,31 +815,20 @@ function openBoard() {
     execFile("xdg-open", [BOARD_HTML_PATH]);
   }
 }
-var isMain = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-if (isMain) {
-  const mode = process.argv[2] || "sync";
-  if (mode === "hook") {
-    try {
-      runHook();
-    } catch {
-      process.stdout.write("{}\n");
-    }
-  } else if (mode === "open") {
-    const res = syncAll();
-    openBoard();
-    console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
-  } else {
-    const res = syncAll();
-    console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
+
+// src/sync-cli.mjs
+var mode = process.argv[2] || "sync";
+if (mode === "hook") {
+  try {
+    runHook();
+  } catch {
+    process.stdout.write("{}\n");
   }
+} else if (mode === "open") {
+  const res = syncAll();
+  openBoard();
+  console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
+} else {
+  const res = syncAll();
+  console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
 }
-export {
-  BOARD_HTML_PATH,
-  LEDGER_DIR,
-  loadBoardTasks,
-  parseTranscript,
-  projectFromUris,
-  runHook,
-  syncAll,
-  writeBoardHtml
-};

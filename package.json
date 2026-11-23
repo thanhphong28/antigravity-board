@@ -1,6 +1,6 @@
 {
   "name": "antigravity-board",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Local analytics board plugin for Google Antigravity (App, IDE & CLI) by BreezeAI",
   "type": "module",
   "license": "MIT",

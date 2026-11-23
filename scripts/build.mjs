@@ -11,7 +11,7 @@ await build({
 
 // 2. Standalone Node ESM bundle for sync CLI & Stop hook (zero runtime node_modules needed)
 await build({
-  entryPoints: ['src/sync.mjs'],
+  entryPoints: ['src/sync-cli.mjs'],
   bundle: true,
   platform: 'node',
   format: 'esm',

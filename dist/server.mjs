@@ -17549,7 +17549,6 @@ function boardHtml(tasks, now = Date.now()) {
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { execFile } from "node:child_process";
 import { StringDecoder } from "node:string_decoder";
 import { DatabaseSync } from "node:sqlite";
 var HOME = os.homedir();
@@ -17820,61 +17819,6 @@ function syncAll() {
   for (const [project, rowsMap] of byProject) upsertProjectCsv(project, rowsMap);
   const res = writeBoardHtml();
   return { synced: seen.size, projects: byProject.size, ...res };
-}
-function runHook() {
-  let raw = "";
-  try {
-    raw = fs.readFileSync(0, "utf8");
-  } catch {
-  }
-  let payload = {};
-  try {
-    payload = raw ? JSON.parse(raw) : {};
-  } catch {
-  }
-  const id = payload.conversationId;
-  const tPath = payload.transcriptPath;
-  if (id && tPath && fs.existsSync(tPath)) {
-    const meta2 = loadDbMetadata().get(id);
-    if (!meta2 || Number(meta2.nesting_depth) === 0) {
-      const stats = parseTranscript(tPath);
-      if (stats) {
-        if (payload.modelName && stats.model === "antigravity") stats.model = normalizeModel(payload.modelName);
-        const project = projectFromUris(payload.workspacePaths?.length ? payload.workspacePaths : meta2?.workspace_uris);
-        const row = buildCsvRow(id, project, meta2?.title || "", stats, "full");
-        upsertProjectCsv(project, /* @__PURE__ */ new Map([[`agy-${id.slice(0, 8)}`, row]]));
-        writeBoardHtml();
-      }
-    }
-  }
-  process.stdout.write("{}\n");
-}
-function openBoard() {
-  if (process.platform === "win32") {
-    execFile("cmd.exe", ["/c", "start", "", BOARD_HTML_PATH], { windowsHide: true });
-  } else if (process.platform === "darwin") {
-    execFile("open", [BOARD_HTML_PATH]);
-  } else {
-    execFile("xdg-open", [BOARD_HTML_PATH]);
-  }
-}
-var isMain = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-if (isMain) {
-  const mode = process.argv[2] || "sync";
-  if (mode === "hook") {
-    try {
-      runHook();
-    } catch {
-      process.stdout.write("{}\n");
-    }
-  } else if (mode === "open") {
-    const res = syncAll();
-    openBoard();
-    console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
-  } else {
-    const res = syncAll();
-    console.log(`Antigravity Board synced (${res.count} sessions across ${res.projects} projects) -> ${res.htmlPath}`);
-  }
 }
 
 // src/server.mjs
