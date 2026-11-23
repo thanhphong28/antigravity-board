@@ -1,0 +1,12 @@
+{
+  "antigravity-board-sync": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node --no-warnings dist/sync.mjs hook",
+        "timeout": 10
+      }
+    ]
+  }
+}

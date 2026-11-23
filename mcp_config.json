@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "antigravity-board": {
+      "command": "node",
+      "args": ["--no-warnings", "${PLUGIN_ROOT}/dist/server.mjs"]
+    }
+  }
+}

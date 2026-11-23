@@ -1,0 +1,20 @@
+{
+  "name": "antigravity-board",
+  "version": "1.0.0",
+  "description": "Local analytics board plugin for Google Antigravity (App, IDE & CLI) by BreezeAI",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thanhphong28/antigravity-board.git"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --no-warnings --test tests/board.test.mjs"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/ext-apps": "latest",
+    "@modelcontextprotocol/sdk": "latest",
+    "esbuild": "latest"
+  }
+}

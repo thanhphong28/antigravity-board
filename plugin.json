@@ -1,0 +1,18 @@
+{
+  "name": "antigravity-board",
+  "displayName": "Antigravity Board",
+  "version": "1.0.0",
+  "description": "Local analytics dashboard for Antigravity (App, IDE & CLI) by BreezeAI: sessions, agent time, tokens, estimated cost, and 12-week activity heatmap right inside Antigravity.",
+  "author": {
+    "name": "BreezeAI (thanhphong28)",
+    "url": "https://github.com/thanhphong28"
+  },
+  "homepage": "https://github.com/thanhphong28/antigravity-board",
+  "repository": "https://github.com/thanhphong28/antigravity-board",
+  "logo": "assets/logo.png",
+  "suggestedPrompts": [
+    "Open Antigravity Board to view my session stats and activity heatmap",
+    "Sync all Antigravity App, IDE, and CLI sessions into Antigravity Board",
+    "Summarize my recent coding activity from Antigravity Board"
+  ]
+}
